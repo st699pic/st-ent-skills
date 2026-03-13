@@ -1,5 +1,5 @@
 ---
-name: 699pic-openapi
+name: st-ent-mcp
 description: Search 699pic enterprise photo/video assets, check whether an asset was already downloaded, inspect download records, and generate download links through the local 699pic OpenAPI integration. Use when the user asks to 搜索699素材、找图片、找视频、查企业下载记录、判断素材是否下载过、生成下载链接，或 when you need to use the local st-mcp / 699pic OpenAPI workflow from this machine.
 ---
 
@@ -30,7 +30,7 @@ mcporter call st-mcp.check_downloaded content_id=701095246 type=1 --output json
 
 Project config file:
 
-- `/Users/huihui/.openclaw/workspace-cron/config/mcporter.json`
+- `/Users/699pic/.openclaw/workspace-cron/config/mcporter.json`
 
 Registered server name:
 
@@ -41,16 +41,16 @@ Registered server name:
 If `mcporter`/MCP times out, use the bundled script directly:
 
 ```bash
-node /Users/huihui/.openclaw/skills/699pic-openapi/scripts/openapi.js search-photos 春节 5
-node /Users/huihui/.openclaw/skills/699pic-openapi/scripts/openapi.js search-videos 城市航拍 5
-node /Users/huihui/.openclaw/skills/699pic-openapi/scripts/openapi.js check-downloaded 701095246 1
-node /Users/huihui/.openclaw/skills/699pic-openapi/scripts/openapi.js download-asset photo 701095246
-node /Users/huihui/.openclaw/skills/699pic-openapi/scripts/openapi.js download-records 1 1 10
+node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js search-photos 春节 5
+node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js search-videos 城市航拍 5
+node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js check-downloaded 701095246 1
+node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js download-asset photo 701095246
+node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js download-records 1 1 10
 ```
 
 Default env baked into the local setup:
 
-- `SERVICE_API_BASE_URL=https://pre-st-api.699pic.com`
+- `SERVICE_API_BASE_URL=https://st-api.699pic.com`
 - `SERVICE_API_KEY` is already configured locally for this machine
 
 ## Tasks
