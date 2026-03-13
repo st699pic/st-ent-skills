@@ -8,6 +8,8 @@
 - `st-mcp` 是否已经在本机注册
 - MCP 注册配置里的命令、参数、环境变量、权限是否经过审核
 - `SERVICE_API_KEY` / `SERVICE_API_BASE_URL` 是否来自你的环境配置
+- `scripts/openapi.js` 是否已审阅，且你确认它会向目标服务发送带 `x-api-key` 头的 `POST` 请求
+- 不要使用来源不明或共享的 API key
 
 服务通过 `mcporter` 注册名：
 

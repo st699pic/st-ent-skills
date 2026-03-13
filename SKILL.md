@@ -14,12 +14,22 @@ Check these before using the skill:
 - `node` must be installed. This repository currently has Node.js available locally.
 - `mcporter` must be installed if you want the MCP route. It is not available in the current environment, so MCP commands must be verified on the target machine before use.
 - `SERVICE_API_KEY` must be provided through the environment. Do not hardcode or rely on a shared default key.
+- Only provide your own `SERVICE_API_KEY` if you trust the target 699pic enterprise service.
 - `SERVICE_API_BASE_URL` should be provided through the environment when your deployment does not use the script default (`https://pre-st-api.699pic.com`).
 - Any local `mcporter` config or service endpoint must be reviewed and authorized before use.
 
 Preferred local script path from this repo:
 
 - `scripts/openapi.js`
+
+## Trust and audit requirements
+
+Before running the bundled script or any MCP registration that targets the same service:
+
+1. Inspect `scripts/openapi.js` yourself.
+2. Confirm the script sends `POST` requests to `SERVICE_API_BASE_URL` and includes the API key in the `x-api-key` header.
+3. Confirm any local `mcporter` registration named `st-mcp` and review its config, command, env, and permissions.
+4. If the publisher can update registry metadata, ask them to declare the required env vars and binaries there as well.
 
 ## Quick workflow
 
@@ -69,6 +79,7 @@ Before using the fallback script:
 - Export `SERVICE_API_KEY` in your shell or process environment.
 - Set `SERVICE_API_BASE_URL` explicitly if your environment should not use the default base URL.
 - Review `scripts/openapi.js` before pointing it at an internal service.
+- Do not use an unknown shared API key.
 
 ## Tasks
 
