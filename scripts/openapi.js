@@ -2,7 +2,7 @@
 'use strict';
 
 const BASE_URL = (process.env.SERVICE_API_BASE_URL || 'https://pre-st-api.699pic.com').replace(/\/+$/, '');
-const API_KEY = process.env.SERVICE_API_KEY || 'st_ent_mVzx2T3vUIicMrNLOoqC4ENGKgiEKM6tvwOwowt8vHE';
+const API_KEY = process.env.SERVICE_API_KEY || '';
 
 function usage() {
   console.error(`Usage:
@@ -11,6 +11,10 @@ function usage() {
   openapi.js check-downloaded <content_id> [type] [year]
   openapi.js download-asset <photo|video> <id> [file_type]
   openapi.js download-records [type] [page] [limit]`);
+  console.error('\nRequired environment variables:');
+  console.error('  SERVICE_API_KEY=<enterprise API key>');
+  console.error('Optional environment variables:');
+  console.error(`  SERVICE_API_BASE_URL=<base URL, default: ${BASE_URL}>`);
   process.exit(1);
 }
 
@@ -42,6 +46,9 @@ async function request(path, params) {
 (async () => {
   const [cmd, ...args] = process.argv.slice(2);
   if (!cmd) usage();
+  if (!API_KEY) {
+    throw new Error('SERVICE_API_KEY is required');
+  }
   switch (cmd) {
     case 'search-photos': {
       const [keywords, limit='10'] = args;

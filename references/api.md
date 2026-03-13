@@ -1,8 +1,13 @@
 # 699pic OpenAPI MCP
 
-本 Skill 对接本机的 `st-mcp` MCP server，服务目录：
+本 Skill 对接本地已注册的 `st-mcp` MCP server。
 
-- `/Users/huihui/.openclaw/mcp/st-mcp`
+使用前先确认你自己的本地环境，而不是复用其他用户目录或预配置：
+
+- `mcporter` 是否已安装并可执行
+- `st-mcp` 是否已经在本机注册
+- MCP 注册配置里的命令、参数、环境变量、权限是否经过审核
+- `SERVICE_API_KEY` / `SERVICE_API_BASE_URL` 是否来自你的环境配置
 
 服务通过 `mcporter` 注册名：
 

@@ -7,6 +7,20 @@ description: Search 699pic enterprise photo/video assets, check whether an asset
 
 Use this skill for 699pic enterprise asset lookup and download-related workflows.
 
+## Preconditions
+
+Check these before using the skill:
+
+- `node` must be installed. This repository currently has Node.js available locally.
+- `mcporter` must be installed if you want the MCP route. It is not available in the current environment, so MCP commands must be verified on the target machine before use.
+- `SERVICE_API_KEY` must be provided through the environment. Do not hardcode or rely on a shared default key.
+- `SERVICE_API_BASE_URL` should be provided through the environment when your deployment does not use the script default (`https://pre-st-api.699pic.com`).
+- Any local `mcporter` config or service endpoint must be reviewed and authorized before use.
+
+Preferred local script path from this repo:
+
+- `scripts/openapi.js`
+
 ## Quick workflow
 
 1. If the user wants candidate assets, search first.
@@ -28,9 +42,11 @@ mcporter call st-mcp.search_videos keywords=城市航拍 limit=5 --output json
 mcporter call st-mcp.check_downloaded content_id=701095246 type=1 --output json
 ```
 
-Project config file:
+Before running MCP commands:
 
-- `/Users/699pic/.openclaw/workspace-cron/config/mcporter.json`
+- Verify where your local `mcporter` project config lives.
+- Confirm that server name `st-mcp` exists in that config.
+- Review the command, args, env, and permissions for that registration.
 
 Registered server name:
 
@@ -41,17 +57,18 @@ Registered server name:
 If `mcporter`/MCP times out, use the bundled script directly:
 
 ```bash
-node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js search-photos 春节 5
-node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js search-videos 城市航拍 5
-node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js check-downloaded 701095246 1
-node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js download-asset photo 701095246
-node /Users/699pic/.openclaw/skills/st-ent-mcp/scripts/openapi.js download-records 1 1 10
+node /absolute/path/to/st-ent-skills/scripts/openapi.js search-photos 春节 5
+node /absolute/path/to/st-ent-skills/scripts/openapi.js search-videos 城市航拍 5
+node /absolute/path/to/st-ent-skills/scripts/openapi.js check-downloaded 701095246 1
+node /absolute/path/to/st-ent-skills/scripts/openapi.js download-asset photo 701095246
+node /absolute/path/to/st-ent-skills/scripts/openapi.js download-records 1 1 10
 ```
 
-Default env baked into the local setup:
+Before using the fallback script:
 
-- `SERVICE_API_BASE_URL=https://st-api.699pic.com`
-- `SERVICE_API_KEY` is already configured locally for this machine
+- Export `SERVICE_API_KEY` in your shell or process environment.
+- Set `SERVICE_API_BASE_URL` explicitly if your environment should not use the default base URL.
+- Review `scripts/openapi.js` before pointing it at an internal service.
 
 ## Tasks
 

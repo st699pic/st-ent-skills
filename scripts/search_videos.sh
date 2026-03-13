@@ -6,6 +6,11 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
+if ! command -v mcporter >/dev/null 2>&1; then
+  echo "mcporter is required but was not found in PATH" >&2
+  exit 1
+fi
+
 KEYWORDS="$1"
 LIMIT="${2:-10}"
 
